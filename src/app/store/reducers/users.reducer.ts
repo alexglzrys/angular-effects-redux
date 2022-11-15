@@ -36,6 +36,12 @@ export const usersReducer = createReducer(
   on(cargarUsuariosError, (state, { payload }) => ({
     ...state,
     loading: false,
-    error: payload
+    // Es importante en un primer momento, devolver todo el contenido del error, para saber que carga util nos interesa considerar
+    //error: payload,
+    error: {
+      url: payload.url,
+      name: payload.name,
+      message: payload.message
+    }
   }))
 );

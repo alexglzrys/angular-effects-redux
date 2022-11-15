@@ -3,7 +3,7 @@ import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { UserService } from '../../services/user.service';
 import { cargarUsuarios, cargarUsuariosSuccess, cargarUsuariosError } from "../actions";
 import { catchError, map, mergeMap } from 'rxjs/operators'
-import { EMPTY } from "rxjs";
+import { of } from "rxjs";
 
 
 // Los efectos en NgRX son simples archivos de servicio de Angular, por tanto deben ser una clase con el decorador @Injectable
@@ -24,7 +24,9 @@ export class UsersEffects {
     mergeMap(() => this.userService.getUsers().pipe(
       // Despachar la acción que notifica que la respuesta es correcta con los usuarios
       map(users => (cargarUsuariosSuccess({users: users}))),
-      catchError(() => EMPTY)
+      // Despachar la acción para notificar en caso de que la respuesta sea erronea
+      // CatchError() no retorna un observable por defecto. Por tanto creamos uno con el operador of()
+      catchError((err) => of(cargarUsuariosError({ payload: err })))
     ))
   ))
 

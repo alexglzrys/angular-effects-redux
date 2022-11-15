@@ -7,7 +7,7 @@ import { map } from 'rxjs/operators';
 })
 export class UserService {
 
-  private url = 'https://reqres.in/api';
+  private url = 'https://reqres.in/api6';
 
   constructor(private http: HttpClient) { }
 
@@ -16,6 +16,7 @@ export class UserService {
       .pipe(
         // Solo me interesa la data, (la respuesta contiene otra metainformación adicional)
         map((response: any) => response['data'])
+        // El manejo de errores ahora se delega a los effects...
       );
   }
 }
