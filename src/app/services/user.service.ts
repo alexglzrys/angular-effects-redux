@@ -19,4 +19,11 @@ export class UserService {
         // El manejo de errores ahora se delega a los effects...
       );
   }
+
+  getUserById(id: string) {
+    return this.http.get(`${ this.url }/users/${ id }`)
+      .pipe(
+        map((response: any) => response['data'])
+      );
+  }
 }
