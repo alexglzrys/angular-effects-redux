@@ -1,4 +1,17 @@
-<div class="row row-cols-1 row-cols-md-5 g-4">
+<div *ngIf="loading" class="alert alert-primary d-flex align-items-center" role="alert">
+  <i class="fa fa-spin fa-sync"></i>
+  <p class="mb-0 ms-3">Cargando...</p>
+</div>
+
+<div *ngIf="error" class="alert alert-danger" role="alert">
+  <h2>Error</h2>
+  <p>No fue posible establecer comunicación con el servicio</p>
+  <pre>
+{{ error | json }}
+  </pre>
+</div>
+
+<div *ngIf="!loading" class="row row-cols-1 row-cols-md-5 g-4">
   <div class="col" *ngFor="let user of users">
     <div class="card">
       <img [src]="user.avatar" class="card-img-top">

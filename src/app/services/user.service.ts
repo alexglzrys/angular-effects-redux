@@ -7,12 +7,12 @@ import { map } from 'rxjs/operators';
 })
 export class UserService {
 
-  private url = 'https://reqres.in/api6';
+  private url = 'https://reqres.in/api';
 
   constructor(private http: HttpClient) { }
 
   getUsers() {
-    return this.http.get(`${this.url}/users?per_page=6`)
+    return this.http.get(`${this.url}/users?per_page=6&delay=3`)
       .pipe(
         // Solo me interesa la data, (la respuesta contiene otra metainformación adicional)
         map((response: any) => response['data'])
