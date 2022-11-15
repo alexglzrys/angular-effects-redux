@@ -1,5 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 import { User } from '../../models/user.model';
+// importar todas las acciones desde el archivo de barril
 import { cargarUsuarios, cargarUsuariosError, cargarUsuariosSuccess } from '../actions';
 
 
@@ -10,7 +11,7 @@ export interface UsersState {
   error: any
 }
 
-export const usersInitialState: UsersState = {
+const usersInitialState: UsersState = {
   users: [],
   loaded: false,
   loading: false,
