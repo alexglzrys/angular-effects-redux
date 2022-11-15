@@ -10,6 +10,8 @@ import { StoreModule } from '@ngrx/store';
 import { appReducers } from './store/app.reducers';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
+import { EffectsModule } from '@ngrx/effects';
+import { effectsArray } from './store/effects/index';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import { environment } from '../environments/environment';
     UsersModule,
     HttpClientModule,
     StoreModule.forRoot(appReducers),
-    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production })
+    // Registrar todos los efectos usados en mi aplicación
+    EffectsModule.forRoot(effectsArray),
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
   ],
   providers: [],
   bootstrap: [AppComponent]
