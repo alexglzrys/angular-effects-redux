@@ -1,1 +1,24 @@
-<p>user works!</p>
+<div *ngIf="loading" class="alert alert-primary d-flex align-items-center" role="alert">
+  <i class="fa fa-spin fa-sync"></i>
+  <p class="mb-0 ms-3">Cargando...</p>
+</div>
+
+<div *ngIf="error" class="alert alert-danger" role="alert">
+  <h2>Error</h2>
+  <p>No fue posible establecer comunicación con el servicio</p>
+  <pre>
+{{ error | json }}
+  </pre>
+</div>
+
+<div *ngIf="loaded" class="row">
+  <div class="col-4">
+    <img [src]="user?.avatar" class="img-fluid" [alt]="user?.first_name">
+  </div>
+  <div class="col">
+    <div class="list-group">
+      <li class="list-group-item"><strong>Nombre: </strong>{{ user?.first_name }}</li>
+      <li class="list-group-item"><strong>Apellidos: </strong>{{ user?.last_name }}</li>
+    </div>
+  </div>
+</div>

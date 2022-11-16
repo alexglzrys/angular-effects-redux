@@ -26,7 +26,8 @@ const userInitialState: UserState = {
 export const userReducer = createReducer(
   userInitialState,
   on(cargarUsuario, (state, { id }) => ({
-    ...state,
+    // Al ser peticiones HTTP ya no interesa los resultados anteriores si deseamos volver a buscar
+    ...userInitialState,
     id,
     loading: true
   })),
@@ -39,7 +40,6 @@ export const userReducer = createReducer(
   on(cargarUsuarioError, (state, { payload }) => ({
     ...state,
     loading: false,
-    loaded: false,
     // Es importante en un primer momento, devolver todo el contenido del error, para saber que carga util nos interesa considerar
     //error: payload,
     error: {
